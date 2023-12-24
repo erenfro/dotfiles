@@ -17,6 +17,10 @@ fish_add_path "{{ .chezmoi.homeDir }}/.go/bin"
 fish_add_path "/opt/homebrew/opt/curl/bin"
 {{- end }}
 
+if type -q tmuxinator
+	alias mux=tmuxinator
+end
+
 if type -q direnv
     direnv hook fish | source
 end
