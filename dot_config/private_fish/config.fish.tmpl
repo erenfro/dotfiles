@@ -1,8 +1,11 @@
 set -gx KUBE_EDITOR micro
 set -gx VISUAL micro
 set -gx EDITOR micro
+set -gx GOPATH {{ .chezmoi.homeDir }}/.go
 set -gx ANSIBLE_FORCE_COLOR true
 set -gx ANSIBLE_HOST_KEY_CHECKING False
+set -gx PY_COLORS true
+set -gx GPG_TTY (tty)
 
 fish_add_path "{{ .chezmoi.homeDir }}/bin"
 fish_add_path "{{ .chezmoi.homeDir }}/.local/bin"
@@ -22,8 +25,16 @@ if type -q atuin
     atuin init fish | source
 end
 
+if type -q thefuck
+	thefuck --alias | source
+end
+
 if type -q starship
     starship init fish | source
+end
+
+if type -q zoxide
+	zoxide init fish | source
 end
 
 if status is-interactive
