@@ -1,6 +1,7 @@
+#!{{ lookPath "bash" }}
+
 # Install micro plugins
-if [ ! -d ~/.config/micro ]; then
-if type -q micro; then
+if command -v micro &>/dev/null
 	#micro -plugin install comment
 	micro -plugin install fish
 	micro -plugin install fzf
