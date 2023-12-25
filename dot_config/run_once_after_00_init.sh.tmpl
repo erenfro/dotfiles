@@ -1,0 +1,13 @@
+# Install micro plugins
+if [ ! -d ~/.config/micro ]; then
+if type -q micro; then
+	#micro -plugin install comment
+	micro -plugin install fish
+	micro -plugin install fzf
+	micro -plugin install editorconfig
+	micro -plugin install gotham-colors
+	#set colorscheme gotham
+	micro -plugin install filemanager
+	micro -plugin install nordcolors
+	#set colorscheme nordcolors
+end
