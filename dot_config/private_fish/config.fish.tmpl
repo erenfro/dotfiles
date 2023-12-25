@@ -33,13 +33,13 @@ if type -q thefuck
 	thefuck --alias | source
 end
 
-if type -q starship
-    starship init fish | source
-end
+#if type -q starship
+#    starship init fish | source
+#end
 
-if type -q zoxide
-	zoxide init fish | source
-end
+#if type -q zoxide
+#	zoxide init fish | source
+#end
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
