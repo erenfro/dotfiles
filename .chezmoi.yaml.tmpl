@@ -1,6 +1,6 @@
 {{- $personal := promptBool "Personal?" -}}{{/* true if this is a personal machine */}}
 {{- if eq $personal true -}}
-  {{- $email = "psi-jack@linux-help.org" -}}
+  {{- $email := promptString "Email?" -}}
   {{- $work := false -}}
 {{- else -}}
   {{- $email = promptString "Email?" -}}

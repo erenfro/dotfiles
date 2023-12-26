@@ -1,0 +1,5 @@
+".local/share/fonts/hack":
+  type: archive
+  url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Hack.zip
+  refreshPeriod: 169h
+  exact: false
