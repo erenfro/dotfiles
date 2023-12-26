@@ -1,0 +1,35 @@
+{{- $gitname := promptStringOnce . "gitname" "Git Name" -}}
+{{- $gitmail := promptStringOnce . "gitmail" "Git Mail Address" -}}
+
+{{- $osid := chezmoi.os -}}
+{{- if .chezmoi.osRelease -}}
+{{-   if hasKey .chezmoi.osRelease "id" -}}
+{{-     $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{-   end -}}
+{{- end -}}
+
+pager = "less -R"
+encryption = "age"
+
+[data]
+  gitname = {{ $gitname | quote }}
+  gitmail = {{ $gitmail | quote }}
+  osid = {{ $osid | quote }}
+
+[age]
+  identity = ~"~/.config/sops/keys.txt"
+  recipient = "age1fc7myuewzdr7rvqr9fl3x3jwky3j4gp92hxguf3dlgnesm9s9e8q45xmp2"
+
+[git]
+  autoCommit = false
+  autoPush = false
+  autoAdd = true
+
+[diff]
+  exclude = ["externals"]
+
+{{- if lookPath "nvim" }}
+[merge]
+  command = "nvim"
+  args = ["-d"]
+{{- end }}
