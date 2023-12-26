@@ -2,8 +2,8 @@
 
 {{- $personal = promptBool "personal" -}}
 
-format = toml
+format = yaml
 
-[data]
-  name = "Eric Renfro"
-  personal = {{ $personal | quote }}
+data:
+  name: "Eric Renfro"
+  personal: {{ $personal | quote }}
