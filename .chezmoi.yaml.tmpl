@@ -1,11 +1,12 @@
 {{- $personal := promptBool "Personal?" -}}{{/* true if this is a personal machine */}}
 {{- if eq $personal true -}}
+  {{- $email = "psi-jack@linux-help.org" -}}
   {{- $work := false -}}
-  {{- $email = "something@work.email" -}}
 {{- else -}}
   {{- $email = promptString "Email?" -}}
   {{- $work := promptBool "Work?" -}}
 {{- end -}}
+
 
 sourceDir: {{ .chezmoi.SourceDir | quote }}
 data:
@@ -26,7 +27,7 @@ data:
       term:
         name: "Hack Nerd Font"
         size: 12.0
-encryption: "age"
+encryption: age
 age:
   recipient: "age1fc7myuewzdr7rvqr9fl3x3jwky3j4gp92hxguf3dlgnesm9s9e8q45xmp2"
   identity: "~/.config/sops/keys.txt"
