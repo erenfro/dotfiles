@@ -1,8 +1,9 @@
 [user]
-	name = Eric Renfro
-	email = psi-jack@linux-help.org
+	name = {{ .name }}
+	email = {{ .email }}
 	#signingkey = 25787986B19167B89BFF55CF3159FF4CB13EBFB4
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOOehoX8okqwKyFj4ozRODK0tIb3aeHlYC9re1/3IbC Eric Renfro (Home/ed25519)
+	#signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOOehoX8okqwKyFj4ozRODK0tIb3aeHlYC9re1/3IbC Eric Renfro (Home/ed25519)
+	signingkey = {{ .ssh }}
 [gpg]
 	#program = gpg2
 	format = ssh

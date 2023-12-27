@@ -5,9 +5,17 @@
 
 {{ $email := "psi-jack@linux-help.org" -}}
 {{ $work  := false -}}
+{{ $ssh   := "" -}}
 {{ if ne $personal true -}}
-{{   $email := promptStringOnce . "email" "What is your email" -}}
-{{   $work  := promptBoolOnce   . "work"  "Is this for work" -}}
+{{   $email = promptStringOnce . "email" "What is your email" -}}
+{{   $work  = promptBoolOnce   . "work"  "Is this for work" -}}
+{{   if eq $work true -}}
+{{     $ssh = (rbwFields "ssh-key-work").publickey.value -}}
+{{   else -}}
+{{     $ssh = (rbwFields "ssh-key").publickey.value -}}
+{{   end -}}
+{{ else -}}
+{{   $ssh = (rbwFields "ssh-key").publickey.value -}}
 {{ end -}}
 
 {{ $osid := .chezmoi.os -}}
@@ -17,9 +25,13 @@
 {{   end -}}
 {{ end -}}
 
+
+encryption = "age"
+
 [data]
   name = "Eric Renfro"
   email = {{ $email | quote }}
+  ssh = {{ $ssh | quote }}
   osid = {{ $osid | quote }}
 
   personal = {{ $personal }}
