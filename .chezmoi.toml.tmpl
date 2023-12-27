@@ -1,23 +1,45 @@
-{{- $gitname := promptStringOnce . "gitname" "Git Name" -}}
-{{- $gitmail := promptStringOnce . "gitmail" "Git Mail Address" -}}
+{{ $personal := promptBoolOnce . "personal" "Is this a personal computer" -}}
+{{ $choicestype := list "desktop" "server" -}}
 
-{{- $osid := chezmoi.os -}}
-{{- if .chezmoi.osRelease -}}
-{{-   if hasKey .chezmoi.osRelease "id" -}}
-{{-     $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
-{{-   end -}}
-{{- end -}}
+{{ $hosttype := promptChoiceOnce . "hosttype" "What type of host are you on" $choicestype -}}
 
-pager = "less -R"
-encryption = "age"
+{{ $email := "psi-jack@linux-help.org" -}}
+{{ $work  := false -}}
+{{ if ne $personal true -}}
+{{   $email := promptStringOnce . "email" "What is your email" -}}
+{{   $work  := promptBoolOnce   . "work"  "Is this for work" -}}
+{{ end -}}
+
+{{ $osid := .chezmoi.os -}}
+{{ if .chezmoi.osRelease -}}
+{{   if hasKey .chezmoi.osRelease "id" -}}
+{{     $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{   end -}}
+{{ end -}}
 
 [data]
-  gitname = {{ $gitname | quote }}
-  gitmail = {{ $gitmail | quote }}
+  name = "Eric Renfro"
+  email = {{ $email | quote }}
   osid = {{ $osid | quote }}
 
+  personal = {{ $personal }}
+  work = {{ $work }}
+  hosttype = {{ $hosttype | quote }}
+
+[programs]
+  terminal = "alacritty"
+  editor = "micro"
+  visual = "less"
+  pager = "less -R"
+  browser = "firefox"
+
+[font]
+  [[term]]
+    name = "Hack Nerd Font"
+    size = 12.0
+
 [age]
-  identity = ~"~/.config/sops/keys.txt"
+  identity = "~/.config/sops/keys.txt"
   recipient = "age1fc7myuewzdr7rvqr9fl3x3jwky3j4gp92hxguf3dlgnesm9s9e8q45xmp2"
 
 [git]
