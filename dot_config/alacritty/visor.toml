@@ -1,0 +1,4 @@
+import = ["/home/psi-jack/.config/alacritty/alacritty.toml"]
+
+[window]
+decorations = "none"
